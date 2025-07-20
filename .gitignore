@@ -1,0 +1,44 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
+# Test binary
+*.test
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Environment files
+.env
+.env.local
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# gqlgen generated files
+internal/*/delivery/graphql/generated.go
+internal/*/delivery/graphql/schema.resolvers.go
+
+# Database files
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
