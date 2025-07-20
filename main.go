@@ -10,8 +10,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	gpl "github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graphql"
-	graph "github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graphql"
+	"github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graph"
 	"github.com/rohanchauhan02/graphql-demo/internal/user/repository"
 	"github.com/rohanchauhan02/graphql-demo/internal/user/usecase"
 	"github.com/rohanchauhan02/graphql-demo/models"
@@ -40,7 +39,7 @@ func main() {
 	// Initialize application layers
 	userRepo := repository.NewUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepo)
-	resolver := gpl.NewResolver(userUsecase)
+	resolver := graph.NewResolver(userUsecase)
 
 	// Create GraphQL server
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{

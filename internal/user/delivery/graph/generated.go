@@ -14,7 +14,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graphql/model"
+	"github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graph/model"
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 )

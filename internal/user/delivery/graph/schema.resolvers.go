@@ -9,7 +9,7 @@ import (
 	"strconv"
 
 	"github.com/rohanchauhan02/graphql-demo/dto"
-	"github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graphql/model"
+	"github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graph/model"
 )
 
 // Register is the resolver for the register field.

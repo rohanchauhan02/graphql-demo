@@ -35,11 +35,6 @@ configs/*.dev.*
 *.sublime-workspace
 *.sublime-project
 
-# # gqlgen generated files
-# internal/*/delivery/graphql/generated.go
-# internal/*/delivery/graphql/schema.resolvers.go
-# internal/*/delivery/graphql/model/models_gen.go
-
 # Database files
 *.db
 *.sqlite
@@ -75,3 +70,4 @@ gqlgen.yml.gen.go
 
 # Editor swap files
 *.sw?
+__debug_*
