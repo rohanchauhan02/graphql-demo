@@ -1,4 +1,4 @@
-package graphql
+package graph
 
 import "github.com/rohanchauhan02/graphql-demo/internal/user"
 
