@@ -1,46 +1,82 @@
-# GraphQL Demo - Clean Architecture
+Certainly! Here's a **professionally written and structured `README.md`** tailored for a production-grade Go project using GraphQL, PostgreSQL, `gqlgen`, and a `Makefile` for automation:
 
-A Go project demonstrating Clean Architecture with GraphQL, PostgreSQL, and gqlgen.
+---
 
-## Project Structure
+````markdown
+# 📦 GraphQL Demo - Clean Architecture in Go
 
-```
+This project demonstrates a clean, modular architecture for building scalable GraphQL APIs using **Go**, **PostgreSQL**, and **gqlgen**. It emphasizes separation of concerns, testability, and maintainability, following Clean Architecture principles.
+
+---
+
+## 📁 Project Structure
+
+```bash
 graphql-demo/
-├── internal/
-│   ├── payment/                    # New subdomain
-│   │   ├── delivery/
-│   │   │   └── graphql/
-│   │   ├── repository/
-│   │   ├── usecase/
-│   │   └── payment.go
-│   └── user/                       # Existing subdomain
-│       └── ...                     # Same structure as payment
-├── models/
-├── dto/
-├── go.mod
-├── gqlgen.yml
-└── main.go
+├── internal/                         # Domain-specific packages
+│   ├── user/                         # User subdomain
+│   │   └── delivery/graphql/         # GraphQL schema and resolvers
+│   └── payment/                      # Payment subdomain
+│       ├── delivery/graphql/
+│       ├── repository/
+│       ├── usecase/
+│       └── payment.go                # Domain interfaces
+├── models/                           # Database models
+├── dto/                              # Data transfer objects
+├── gqlgen.yml                        # gqlgen configuration
+├── go.mod / go.sum                   # Go modules
+├── Makefile                          # Automation commands
+└── main.go                           # Application entrypoint
+````
+
+---
+
+## 🛠 Features
+
+* ✅ Clean Architecture principles (Domain → Usecase → Delivery)
+* ✅ GraphQL API using gqlgen
+* ✅ PostgreSQL integration
+* ✅ Automated GraphQL codegen with resolver preservation
+* ✅ Modular and extensible structure
+* ✅ `Makefile` for streamlined developer workflow
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone and Setup
+
+```bash
+git clone https://github.com/yourusername/graphql-demo.git
+cd graphql-demo
+cp .env.example .env
+make setup
 ```
 
-## Adding a New Subdomain (e.g., Payment)
+### 2. Run the Application
 
-### 1. Create Subdomain Structure
+```bash
+make start
+```
+
+Visit GraphQL Playground at [http://localhost:8080](http://localhost:8080)
+
+---
+
+## 🧱 Adding a New Subdomain (e.g., `payment`)
+
+### 1. Create the Structure
 
 ```bash
 mkdir -p internal/payment/{delivery/graphql,repository,usecase}
 touch internal/payment/payment.go
 ```
 
-### 2. Define Interfaces (`payment.go`)
+### 2. Define Domain Interfaces
 
 ```go
+// internal/payment/payment.go
 package payment
-
-import (
-	"context"
-	"graphql-demo/dto"
-	"graphql-demo/models"
-)
 
 type Repository interface {
 	Create(ctx context.Context, payment *models.Payment) error
@@ -55,9 +91,8 @@ type Usecase interface {
 
 ### 3. Add GraphQL Schema
 
-Create `internal/payment/delivery/graphql/schema.graphqls`:
-
 ```graphql
+# internal/payment/delivery/graphql/schema.graphqls
 type Payment {
   id: ID!
   amount: Float!
@@ -79,120 +114,118 @@ extend type Query {
 }
 ```
 
-### 4. Update gqlgen.yml
+### 4. Update `gqlgen.yml`
 
 ```yaml
 schema:
   - internal/user/delivery/graphql/schema.graphqls
-  - internal/payment/delivery/graphql/schema.graphqls  # Added
-# ... rest of config remains same
+  - internal/payment/delivery/graphql/schema.graphqls
 ```
 
-### 5. Generate GraphQL Code
+### 5. Generate Code
 
 ```bash
-# Clean existing generated files
-find internal -name "*.go" -not -path "*delivery/graphql/model*" -delete
-
-# Regenerate
-go run github.com/99designs/gqlgen generate
+make generate
 ```
 
-## Running the Project
+---
 
-### Prerequisites
-- Go 1.16+
-- PostgreSQL
+## 📘 Makefile Overview
 
-### Setup
+The included `Makefile` provides commonly used commands to speed up development:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/graphql-demo.git
-   cd graphql-demo
-   ```
+| Command         | Description                                   |
+| --------------- | --------------------------------------------- |
+| `make setup`    | Install dependencies and start PostgreSQL     |
+| `make generate` | Regenerate GraphQL code (preserves resolvers) |
+| `make migrate`  | Run database migrations                       |
+| `make fmt`      | Format Go code                                |
+| `make lint`     | Lint the codebase                             |
+| `make start`    | Start the application                         |
+| `make build`    | Build binary to `bin/` folder                 |
+| `make test`     | Run unit tests                                |
+| `make clean`    | Remove generated and backup files             |
+| `make init`     | Full setup: DB + generate + migrate + fmt     |
 
-2. Install dependencies:
-   ```bash
-   go mod tidy
-   ```
+---
 
-3. Set up database:
-   ```bash
-   createdb graphql_demo
-   ```
+## 🧪 Testing
 
-4. Configure environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-
-### Running
+Run all unit tests with verbose output:
 
 ```bash
-go run main.go
+make test
 ```
 
-Access GraphQL playground at `http://localhost:8080`
+---
 
-```gitignore
-# Binaries
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-bin/
+## 🧹 Clean Generated Files
 
-# Test binary
-*.test
+To remove generated GraphQL and backup files:
 
-# Dependency directories
-vendor/
-node_modules/
-
-# Environment files
-.env
-.env.local
-
-# IDE specific
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# gqlgen generated files
-internal/*/delivery/graphql/generated.go
-internal/*/delivery/graphql/schema.resolvers.go
-
-# Database files
-*.db
-*.sqlite
-
-# Logs
-*.log
-
-# OS generated
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+```bash
+make clean
 ```
 
-## Key Commands
+---
 
-| Command | Description |
-|---------|-------------|
-| `go run github.com/99designs/gqlgen generate` | Generate GraphQL code |
-| `go run main.go` | Start development server |
-| `go test ./...` | Run all tests |
+## 🔄 Code Generation Logic
 
-## Architecture Flow
+Custom logic in the `Makefile` ensures:
 
-1. **Request** → GraphQL Handler (Delivery)
-2. **Handler** → Calls Usecase
-3. **Usecase** → Business Logic → Calls Repository
-4. **Repository** → Database Operations
+* Your custom resolver code is **preserved** between generations
+* `.bak` files used during merging are cleaned up automatically
+* No duplicate closing braces (`}`) are appended
+
+> ✅ You don’t need to manually edit `schema.resolvers.go` after codegen!
+
+---
+
+## 📐 Architecture Flow
+
+```
+GraphQL Request
+      ↓
+GraphQL Handler (Delivery)
+      ↓
+Usecase (Business Logic)
+      ↓
+Repository (Data Access)
+      ↓
+PostgreSQL
+```
+
+---
+
+## 🧑‍💻 Requirements
+
+* Go 1.16+
+* Docker (for PostgreSQL container)
+* PostgreSQL (optional if already installed)
+* golangci-lint (for linting)
+
+---
+
+## 🙌 Contributions
+
+Feel free to open issues or submit PRs to improve this boilerplate or add new features.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+```
+
+---
+
+Let me know if you’d like me to also include:
+
+- CI/CD setup (e.g., GitHub Actions)
+- Dockerfile + `docker-compose.yml`
+- GraphQL query examples
+- Swagger/OpenAPI for REST fallback
+
+I'm happy to extend the documentation further.
+```

@@ -42,3 +42,4 @@ internal/*/delivery/graphql/schema.resolvers.go
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.bak
