@@ -1,0 +1,77 @@
+# Binaries and executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Test and coverage artifacts
+*.test
+*.out
+coverage.txt
+profile.cov
+*.cover
+
+# Dependency directories
+vendor/
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Development configuration
+configs/*.local.*
+configs/*.dev.*
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# gqlgen generated files
+internal/*/delivery/graphql/generated.go
+internal/*/delivery/graphql/schema.resolvers.go
+internal/*/delivery/graphql/model/models_gen.go
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Logs
+*.log
+logs/
+*.logs
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Go workspace files
+go.work
+go.work.sum
+
+# gqlgen cache
+gqlgen.yml.gen.go
+
+# Editor swap files
+*.sw?
