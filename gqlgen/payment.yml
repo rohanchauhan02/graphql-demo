@@ -1,0 +1,17 @@
+# gqlgen_payment.yml
+schema:
+  - internal/payment/delivery/graph/schema.graphqls
+
+exec:
+  filename: internal/payment/delivery/graph/generated.go
+  package: graph
+
+model:
+  filename: internal/payment/delivery/graph/model/models_gen.go
+  package: model
+
+resolver:
+  dir: internal/payment/delivery/graph
+  package: graph
+  layout: follow-schema  # Can be removed if using default layout
+

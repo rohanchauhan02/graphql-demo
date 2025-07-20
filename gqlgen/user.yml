@@ -1,0 +1,17 @@
+
+schema:
+  - internal/user/delivery/graph/schema.graphqls
+
+exec:
+  filename: internal/user/delivery/graph/generated.go
+  package: graph
+
+model:
+  filename: internal/user/delivery/graph/model/models_gen.go
+  package: model
+
+resolver:
+  dir: internal/user/delivery/graph
+  package: graph
+  layout: follow-schema  # Can be removed if using default layout
+

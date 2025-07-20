@@ -1,0 +1,19 @@
+type Payment {
+  id: ID!
+  amount: Float!
+  status: String!
+  createdAt: String!
+}
+
+input PaymentInput {
+  amount: Float!
+  userId: ID!
+}
+
+extend type Mutation {
+  createPayment(input: PaymentInput!): Payment!
+}
+
+extend type Query {
+  payment(id: ID!): Payment!
+}

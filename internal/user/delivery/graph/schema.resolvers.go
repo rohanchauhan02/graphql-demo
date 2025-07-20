@@ -6,118 +6,34 @@ package graph
 
 import (
 	"context"
-	"strconv"
+	"fmt"
 
-	"github.com/rohanchauhan02/graphql-demo/dto"
 	"github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graph/model"
 )
 
 // Register is the resolver for the register field.
 func (r *mutationResolver) Register(ctx context.Context, input model.CreateUserInput) (*model.AuthResponse, error) {
-	createInput := dto.CreateUserInput{
-		Name:     input.Name,
-		Email:    input.Email,
-		Password: input.Password,
-	}
-
-	authResp, err := r.usecase.Register(ctx, createInput)
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.AuthResponse{
-		Token: authResp.Token,
-		User: &model.User{
-			ID:        strconv.FormatUint(uint64(authResp.User.ID), 10),
-			Name:      authResp.User.Name,
-			Email:     authResp.User.Email,
-			CreatedAt: authResp.User.CreatedAt,
-			UpdatedAt: authResp.User.UpdatedAt,
-		},
-	}, nil
+	panic(fmt.Errorf("not implemented: Register - register"))
 }
 
 // Login is the resolver for the login field.
 func (r *mutationResolver) Login(ctx context.Context, input model.LoginInput) (*model.AuthResponse, error) {
-	loginInput := dto.LoginInput{
-		Email:    input.Email,
-		Password: input.Password,
-	}
-
-	authResp, err := r.usecase.Login(ctx, loginInput)
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.AuthResponse{
-		Token: authResp.Token,
-		User: &model.User{
-			ID:        strconv.FormatUint(uint64(authResp.User.ID), 10),
-			Name:      authResp.User.Name,
-			Email:     authResp.User.Email,
-			CreatedAt: authResp.User.CreatedAt,
-			UpdatedAt: authResp.User.UpdatedAt,
-		},
-	}, nil
+	panic(fmt.Errorf("not implemented: Login - login"))
 }
 
 // UpdateUser is the resolver for the updateUser field.
 func (r *mutationResolver) UpdateUser(ctx context.Context, id string, input model.UpdateUserInput) (*model.User, error) {
-	uid, err := strconv.ParseUint(id, 10, 64)
-	if err != nil {
-		return nil, err
-	}
-
-	updateInput := dto.UpdateUserInput{
-		Name:     *input.Name,
-		Email:    *input.Email,
-		Password: *input.Password,
-	}
-
-	userResp, err := r.usecase.UpdateUser(ctx, uint(uid), updateInput)
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.User{
-		ID:        id,
-		Name:      userResp.Name,
-		Email:     userResp.Email,
-		CreatedAt: userResp.CreatedAt,
-		UpdatedAt: userResp.UpdatedAt,
-	}, nil
+	panic(fmt.Errorf("not implemented: UpdateUser - updateUser"))
 }
 
 // DeleteUser is the resolver for the deleteUser field.
 func (r *mutationResolver) DeleteUser(ctx context.Context, id string) (bool, error) {
-	uid, err := strconv.ParseUint(id, 10, 64)
-	if err != nil {
-		return false, err
-	}
-
-	err = r.usecase.DeleteUser(ctx, uint(uid))
-	return err == nil, err
+	panic(fmt.Errorf("not implemented: DeleteUser - deleteUser"))
 }
 
 // User is the resolver for the user field.
 func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error) {
-	uid, err := strconv.ParseUint(id, 10, 64)
-	if err != nil {
-		return nil, err
-	}
-
-	userResp, err := r.usecase.GetUser(ctx, uint(uid))
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.User{
-		ID:        id,
-		Name:      userResp.Name,
-		Email:     userResp.Email,
-		CreatedAt: userResp.CreatedAt,
-		UpdatedAt: userResp.UpdatedAt,
-	}, nil
+	panic(fmt.Errorf("not implemented: User - user"))
 }
 
 // Mutation returns MutationResolver implementation.
