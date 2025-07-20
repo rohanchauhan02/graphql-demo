@@ -1,0 +1,13 @@
+schema:
+  - internal/user/delivery/graphql/schema.graphqls
+exec:
+  filename: internal/user/delivery/graphql/generated.go
+  package: graphql
+model:
+  filename: internal/user/delivery/graphql/model/models_gen.go
+  package: model
+resolver:
+  filename: internal/user/delivery/graphql/schema.resolvers.go
+  package: graphql
+autobind:
+  - "github.com/rohanchauhan02/graphql-demo/internal/user/delivery/graphql/model"
